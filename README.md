@@ -1,5 +1,13 @@
 # kotlin-spring-webflux
 
+## Set up
+1. enable git hooks
+```bash
+git config --local core.hooksPath .githooks/ 
+chmod 700 .githooks/pre-push
+```
+
+
 ## Test
 
 ```
