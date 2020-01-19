@@ -37,11 +37,32 @@ chmod 700 .githooks/pre-push
     - Check on all options (exclude copyright)
 
 ## Test
+1. init test & integration test
 ```bash
-./gradlew test
-./gradlew apiTest
-./gradlew check
+# unit test & lint
+./gradlew clean check
+# api test (must run after test)
+./gradlew clean check apiTest
+# (optional) test coverage report
 ./gradlew jacocoTestReport
 ```
 
-## Deploy
+2. container test
+```bash
+# package
+./gradlew clean build bootJar
+# start in test container
+docker-compose -f docker-compose.test.yml up --build
+```
+
+## Deploy (locally)
+
+```bash
+# build image
+docker build -t kotlin-spring-webflux .
+# inject environment variables, check details in config/application-dev.yml
+docker run -p 8080:8080 <environment> kotlin-spring-webflux
+```
+
+**Should put this part into CI/CD, DON'T manually deploy in production**
+**If you want to check it locally, please try container test**
