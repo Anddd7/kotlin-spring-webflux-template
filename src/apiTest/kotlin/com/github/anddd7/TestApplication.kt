@@ -36,8 +36,8 @@ internal class TestApplication {
   fun dataSource(preparedDbProvider: PreparedDbProvider, connectionInfo: ConnectionInfo): DataSource =
       preparedDbProvider.createDataSourceFromConnectionInfo(connectionInfo)
 
-  @Primary
   @Bean
+  @Primary
   fun r2dbcProperties(connectionInfo: ConnectionInfo) =
       R2dbcProperties().apply {
         url = "r2dbc:postgresql://127.0.0.1:${connectionInfo.port}/${connectionInfo.dbName}"
@@ -49,11 +49,12 @@ internal class TestApplication {
   fun wireMock(): WireMockServer {
     val mockServer = WireMockServer(options().dynamicPort())
     mockServer.start()
-    WireMock.configureFor("localhost", mockServer.port());
+    WireMock.configureFor("localhost", mockServer.port())
     return mockServer
   }
 
   @Bean
+  @Primary
   fun downstream(mockServer: WireMockServer) =
       Downstream().apply {
         stock = mockServer.url("stock")

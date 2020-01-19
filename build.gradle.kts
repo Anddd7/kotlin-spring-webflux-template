@@ -56,8 +56,8 @@ sourceSets {
   create("apiTest") {
     java.srcDir("src/apiTest/kotlin")
     resources.srcDir("src/apiTest/resources")
-    compileClasspath += sourceSets["main"].output + configurations["testRuntimeClasspath"]
-    runtimeClasspath += output + compileClasspath
+    compileClasspath += sourceSets["test"].compileClasspath
+    runtimeClasspath += sourceSets["test"].runtimeClasspath
   }
 }
 
@@ -66,8 +66,8 @@ idea {
     jdkName = "11"
   }
   module {
-    outputDir = file("$buildDir/classes/main")
-    testOutputDir = file("$buildDir/classes/test")
+    outputDir = file("$buildDir/idea-compiler/main")
+    testOutputDir = file("$buildDir/idea-compiler/test")
   }
 }
 
