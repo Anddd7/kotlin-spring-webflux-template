@@ -26,7 +26,7 @@ internal class ProductControllerApiTest {
   @Test
   internal fun `should get the product by id`() {
     stubFor(
-        get("/stock/coroutine/product/1/stock")
+        get("/stock/product/1/stock")
             .willReturn(WireMock.okJson("9999.99"))
     )
 
