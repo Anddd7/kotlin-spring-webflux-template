@@ -1,0 +1,16 @@
+CREATE TABLE BOOKS
+(
+    id    SERIAL NOT NULL
+        CONSTRAINT BOOKS_PK PRIMARY KEY,
+    name  VARCHAR,
+    page_count  INTEGER,
+    author_id INTEGER
+);
+
+CREATE TABLE AUTHORS
+(
+    id    SERIAL NOT NULL
+        CONSTRAINT AUTHORS_PK PRIMARY KEY,
+    first_name  VARCHAR,
+    last_name  VARCHAR
+);
