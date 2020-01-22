@@ -1,5 +1,7 @@
 package com.github.anddd7.config
 
+import com.github.anddd7.entity.Author
+import com.github.anddd7.entity.Book
 import graphql.GraphQL
 import graphql.schema.DataFetchingEnvironment
 import graphql.schema.idl.RuntimeWiring
@@ -42,51 +44,36 @@ class GraphQLConfig {
    * data fetcher demos
    */
   @Bean("bookByIdDataFetcher")
-  fun getBookByIdDataFetcher(): SpringDataFetcher<Map<String, String>> {
-    return object : SpringDataFetcher<Map<String, String>> {
-      override fun getType() = "Book"
+  fun getBookByIdDataFetcher(): SpringDataFetcher<Book> {
+    return object : SpringDataFetcher<Book> {
+      override fun getType() = "Query"
       override fun getFieldName() = "bookById"
-      override fun get(environment: DataFetchingEnvironment): Map<String, String>? =
-          books.firstOrNull { it["id"] == environment.getArgument<String>("id") }
+      override fun get(environment: DataFetchingEnvironment): Book? =
+      books.firstOrNull { it.id == environment.getArgument<String>("id").toInt() }
     }
   }
 
   @Bean("authorDataFetcher")
-  fun getAuthorDataFetcher(): SpringDataFetcher<Map<String, String>> {
-    return object : SpringDataFetcher<Map<String, String>> {
-      override fun getType() = "Author"
-      override fun getFieldName() = "authorId"
-      override fun get(environment: DataFetchingEnvironment): Map<String, String>? {
-        return authors.firstOrNull { it["id"] == environment.getSource<Map<String, String>>()["authorId"] }
+  fun getAuthorDataFetcher(): SpringDataFetcher<Author> {
+    return object : SpringDataFetcher<Author> {
+      override fun getType() = "Book"
+      override fun getFieldName() = "author"
+      override fun get(environment: DataFetchingEnvironment): Author? {
+        return authors.firstOrNull { it.id == environment.getSource<Book>().authorId }
       }
     }
   }
 
-  val books: List<Map<String, String>> = listOf(
-      mapOf("id" to "book-1",
-          "name" to "Harry Potter and the Philosopher's Stone",
-          "pageCount" to "223",
-          "authorId" to "author-1"),
-      mapOf("id" to "book-2",
-          "name" to "Moby Dick",
-          "pageCount" to "635",
-          "authorId" to "author-2"),
-      mapOf("id" to "book-3",
-          "name" to "Interview with the vampire",
-          "pageCount" to "371",
-          "authorId" to "author-3")
+  val books: List<Book> = listOf(
+      Book(1, "Harry Potter and the Philosopher's Stone", 223, 1),
+      Book(1, "Moby Dick", 635, 2),
+      Book(1, "Interview with the vampire", 371, 3)
   )
 
-  private val authors: List<Map<String, String>> = listOf(
-      mapOf("id" to "author-1",
-          "firstName" to "Joanne",
-          "lastName" to "Rowling"),
-      mapOf("id" to "author-2",
-          "firstName" to "Herman",
-          "lastName" to "Melville"),
-      mapOf("id" to "author-3",
-          "firstName" to "Anne",
-          "lastName" to "Rice")
+  private val authors: List<Author> = listOf(
+      Author(1, "Joanne", "Rowling"),
+      Author(2, "Herman", "Melville"),
+      Author(3, "Anne", "Rice")
   )
 }
 
