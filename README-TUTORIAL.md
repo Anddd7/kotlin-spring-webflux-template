@@ -105,9 +105,17 @@ MockK.coEvery
 WireMock
 EmbeddedDatabase
 
+## graphql 
+
+- graphql目前只支持CompletedFuture, RxJava和Reactor需要转一下才能接上异步操作
+
 ## Reactive Transaction
 
+// TODO
+
 ## WebFlux Security
+
+// TODO
 
 ## 线程模型 & I/O 模型
 

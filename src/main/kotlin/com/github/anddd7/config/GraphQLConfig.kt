@@ -19,9 +19,9 @@ class GraphQLConfig {
   lateinit var graphQLDefinition: Resource
 
   @Bean
-  fun graphQL(springDataFetchers: List<SpringDataFetcher<*>>): GraphQL {
+  fun graphQL(reactiveMonoFetchers: List<ReactiveFetcher<*>>): GraphQL {
     val typeRegistry = getTypeDefinitionRegistry()
-    val runtimeWiring = getRuntimeWiring(springDataFetchers)
+    val runtimeWiring = getRuntimeWiring(reactiveMonoFetchers)
     val graphQLSchema = SchemaGenerator().makeExecutableSchema(typeRegistry, runtimeWiring)
 
     return GraphQL.newGraphQL(graphQLSchema).build()
@@ -30,9 +30,9 @@ class GraphQLConfig {
   private fun getTypeDefinitionRegistry() =
       SchemaParser().parse(Files.readString(graphQLDefinition.file.toPath()))
 
-  private fun getRuntimeWiring(springDataFetchers: List<SpringDataFetcher<*>>): RuntimeWiring =
+  private fun getRuntimeWiring(reactiveMonoFetchers: List<ReactiveFetcher<*>>): RuntimeWiring =
       newRuntimeWiring().apply {
-        springDataFetchers.forEach { fetcher ->
+        reactiveMonoFetchers.forEach { fetcher ->
           type(fetcher.getType()) { it.dataFetcher(fetcher.getFieldName(), fetcher) }
         }
       }.build()
