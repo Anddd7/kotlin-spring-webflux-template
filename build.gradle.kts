@@ -115,6 +115,9 @@ dependencies {
   //  implementation("org.springframework.boot:spring-boot-starter-security")
   //  testImplementation("org.springframework.security:spring-security-test")
 
+  /* graphql */
+  implementation("com.graphql-java:graphql-java-spring-boot-starter-webflux:1.0")
+
   /* monitoring x logging */
   implementation("org.springframework.boot:spring-boot-starter-actuator")
   runtimeOnly("net.logstash.logback:logstash-logback-encoder:5.2")
