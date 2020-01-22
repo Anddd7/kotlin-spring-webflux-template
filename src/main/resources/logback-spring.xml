@@ -1,7 +1,13 @@
 <configuration>
   <include resource="included-console.xml"/>
 
-  <springProfile name="local,test,dev">
+  <springProfile name="local">
+    <root level="DEBUG">"
+      <appender-ref ref="STDOUT"/>
+    </root>
+  </springProfile>
+
+  <springProfile name="test,dev">
     <logger level="DEBUG" name="com.github.anddd7.service"/>
 
     <root level="INFO">"
