@@ -11,7 +11,7 @@
   </springProfile>
 
   <springProfile name="dev">
-    <logger level="DEBUG" name="com.github.anddd7.service"/>
+    <logger level="DEBUG" name="com.github.anddd7"/>
 
     <root level="INFO">"
       <appender-ref ref="STDOUT"/>
@@ -19,7 +19,7 @@
   </springProfile>
 
   <springProfile name="deploy">
-    <logger level="DEBUG" name="com.github.anddd7.service"/>
+    <logger level="DEBUG" name="com.github.anddd7"/>
 
     <root level="INFO">"
       <appender-ref ref="ELK"/>
