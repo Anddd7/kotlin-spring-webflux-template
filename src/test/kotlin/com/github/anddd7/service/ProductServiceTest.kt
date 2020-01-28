@@ -38,7 +38,7 @@ internal class ProductServiceTest {
 
   @Test
   fun `should get product and stock info together`() {
-    every { productRepository.findById(any<Long>()) } returns Mono.just(mockk(relaxed = true))
+    every { productRepository.findById(any<Int>()) } returns Mono.just(mockk(relaxed = true))
     every { stockClient.getStock(any()) } returns Mono.just(mockk())
 
     StepVerifier.create(productService.getProductStock(1))
@@ -46,7 +46,7 @@ internal class ProductServiceTest {
         .verifyComplete()
 
     verify(exactly = 1) {
-      productRepository.findById(any<Long>())
+      productRepository.findById(any<Int>())
       stockClient.getStock(any())
     }
   }

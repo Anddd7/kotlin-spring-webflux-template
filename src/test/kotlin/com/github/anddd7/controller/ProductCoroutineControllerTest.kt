@@ -6,6 +6,7 @@ import com.github.anddd7.service.ProductCoroutineService
 import com.github.anddd7.service.dto.ProductStockDTO
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.coEvery
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.flowOf
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -16,6 +17,7 @@ import org.springframework.test.web.reactive.server.expectBody
 import org.springframework.test.web.reactive.server.expectBodyList
 import java.math.BigDecimal
 
+@FlowPreview
 @ContextConfiguration(classes = [Application::class])
 @WebFluxTest(ProductCoroutineController::class)
 internal class ProductCoroutineControllerTest {

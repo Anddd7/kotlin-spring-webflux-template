@@ -15,7 +15,7 @@ class ProductService(
 ) {
   fun findAll(): Flux<Product> = productRepository.findAll()
   fun getProductStock(id: Int): Mono<ProductStockDTO> {
-    val product = productRepository.getOne(id)
+    val product: Mono<Product> = productRepository.findById(id)
     val stock = stockClient.getStock(id)
 
     return Mono.zip(product, stock, ::ProductStockDTO)
