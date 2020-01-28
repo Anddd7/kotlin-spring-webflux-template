@@ -11,7 +11,7 @@ class LayerDependencyTest {
   fun `should pass the layer dependency check for all packages`(importedClasses: JavaClasses) =
       layeredArchitecture()
           .layer("Controller").definedBy("..controller..")
-          .layer("Service").definedBy("..service..")
+          .layer("Service").definedBy("..service..", "..dataFetcher..")
           .layer("Client").definedBy("..client..")
           .layer("Repository").definedBy("..repository..")
           .layer("Entity").definedBy("..entity..")

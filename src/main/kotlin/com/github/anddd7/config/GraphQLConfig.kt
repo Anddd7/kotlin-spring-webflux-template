@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.io.Resource
-import java.nio.file.Files.readString
+import java.nio.file.Files
 
 
 @Configuration
@@ -28,7 +28,7 @@ class GraphQLConfig {
   }
 
   private fun getTypeDefinitionRegistry() =
-      SchemaParser().parse(readString(graphQLDefinition.file.toPath()))
+      SchemaParser().parse(String(Files.readAllBytes(graphQLDefinition.file.toPath())))
 
   private fun getRuntimeWiring(reactiveMonoFetchers: List<ReactiveFetcher<*>>): RuntimeWiring =
       newRuntimeWiring().apply {
