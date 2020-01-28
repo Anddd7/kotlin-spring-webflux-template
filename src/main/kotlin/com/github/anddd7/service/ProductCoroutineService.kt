@@ -18,7 +18,7 @@ class ProductCoroutineService(
   @FlowPreview
   fun findAll(): Flow<Product> = productRepository.findAll()
 
-  suspend fun getProductStock(id: Long): ProductStockDTO = coroutineScope {
+  suspend fun getProductStock(id: Int): ProductStockDTO = coroutineScope {
     val product = async { productRepository.getOne(id) }
     val stock = async { stockClient.getStock(id) }
 

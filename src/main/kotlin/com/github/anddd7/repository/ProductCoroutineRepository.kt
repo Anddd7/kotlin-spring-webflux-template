@@ -16,7 +16,7 @@ class ProductCoroutineRepository(private val databaseClient: DatabaseClient) {
   fun findAll(): Flow<Product> =
       databaseClient.select().from<Product>().fetch().all().asFlow()
 
-  suspend fun getOne(id: Long): Product =
+  suspend fun getOne(id: Int): Product =
       databaseClient.select().from<Product>()
           .matching(
               where("id").`is`(id)

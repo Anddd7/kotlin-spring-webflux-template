@@ -1,5 +1,6 @@
 <configuration>
   <include resource="included-console.xml"/>
+  <include resource="included-elk.xml"/>
 
   <springProfile name="local,test">
     <logger level="DEBUG" name="com.github.anddd7"/>
@@ -17,12 +18,11 @@
     </root>
   </springProfile>
 
-  <!--  TODO replace by logback-->
   <springProfile name="deploy">
     <logger level="DEBUG" name="com.github.anddd7.service"/>
 
     <root level="INFO">"
-      <appender-ref ref="STDOUT"/>
+      <appender-ref ref="ELK"/>
     </root>
   </springProfile>
 </configuration>

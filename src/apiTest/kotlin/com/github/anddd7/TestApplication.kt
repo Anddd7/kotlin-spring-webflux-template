@@ -11,6 +11,7 @@ import io.zonky.test.db.postgres.embedded.PreparedDbProvider.forPreparer
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.r2dbc.R2dbcProperties
+import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Primary
@@ -68,5 +69,6 @@ internal class TestApplication {
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
     classes = [TestApplication::class]
 )
+@AutoConfigureWebTestClient
 @ActiveProfiles("test")
 annotation class EnableApiTest

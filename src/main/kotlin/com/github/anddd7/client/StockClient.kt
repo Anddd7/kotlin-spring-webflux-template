@@ -9,7 +9,7 @@ import java.math.BigDecimal
 
 @Component
 class StockClient(private val webClient: WebClient) {
-  fun getStock(productId: Long): Mono<BigDecimal> = webClient
+  fun getStock(productId: Int): Mono<BigDecimal> = webClient
       .get()
       .uri("/product/$productId/stock")
       .accept(MediaType.APPLICATION_JSON)

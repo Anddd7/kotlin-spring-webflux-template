@@ -9,7 +9,7 @@ import java.math.BigDecimal
 
 @Component
 class StockCoroutineClient(private val webClient: WebClient) {
-  suspend fun getStock(productId: Long): BigDecimal =
+  suspend fun getStock(productId: Int): BigDecimal =
       webClient.get().uri("/coroutine/product/$productId/stock").accept(MediaType.APPLICATION_JSON)
           .awaitExchange().awaitBody()
 }
