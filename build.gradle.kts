@@ -50,14 +50,14 @@ plugins {
 
 /** -------------- configure imported plugin -------------- */
 
-val sourceSets = the<SourceSetContainer>()
-
 sourceSets {
   create("apiTest") {
-    java.srcDir("src/apiTest/kotlin")
-    resources.srcDir("src/apiTest/resources")
-    compileClasspath += sourceSets["test"].compileClasspath
-    runtimeClasspath += sourceSets["test"].runtimeClasspath
+    withConvention(org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet::class) {
+      kotlin.srcDir("src/apiTest/kotlin")
+      resources.srcDir("src/apiTest/resources")
+      compileClasspath += sourceSets["test"].compileClasspath
+      runtimeClasspath += sourceSets["test"].runtimeClasspath
+    }
   }
 }
 
